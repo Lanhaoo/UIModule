@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Lanhaoo/UIModuleSpec.git'
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'UIModule_Example' do
+  pod 'UIModule', :path => '../'
+
+  target 'UIModule_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

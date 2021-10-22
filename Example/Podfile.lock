@@ -1,0 +1,47 @@
+PODS:
+  - AsyncSwift (2.0.4)
+  - DZNEmptyDataSet (1.8.1)
+  - FWPopupView (4.2.1):
+    - SnapKit
+  - Kingfisher (4.10.1)
+  - MJRefresh (3.7.2)
+  - SnapKit (4.2.0)
+  - TangramKit (1.4.2)
+  - UIModule (0.0.1):
+    - AsyncSwift
+    - DZNEmptyDataSet
+    - FWPopupView
+    - Kingfisher (~> 4.10.1)
+    - MJRefresh
+    - TangramKit
+
+DEPENDENCIES:
+  - UIModule (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - AsyncSwift
+    - DZNEmptyDataSet
+    - FWPopupView
+    - Kingfisher
+    - MJRefresh
+    - SnapKit
+    - TangramKit
+
+EXTERNAL SOURCES:
+  UIModule:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FWPopupView: eea10388d25444fbe69b9222a5b5f317bb049395
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  TangramKit: aad3ab8f9617418c9da96d59cddd71134ae8af83
+  UIModule: f1c76103c6981f000b1e59d10f06668c1b52843a
+
+PODFILE CHECKSUM: fcc664b15beac7892f25859d1c9cd51c9c5ee3c2
+
+COCOAPODS: 1.10.1
