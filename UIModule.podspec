@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIModule'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = '项目ui模块'
   s.description      = <<-DESC
 项目ui的基础模块
@@ -20,6 +20,19 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.swift_version    = '5.0'
   s.source_files = 'UIModule/Classes/**/*'
+  
+  s.subspec 'EZSwiftExtensions' do |ezswiftExtensions|
+      ezswiftExtensions.source_files = 'UIModule/Classes/EZSwiftExtensions/*'
+      end
+#  s.subspec 'Category' do |category|
+#        category.source_files = 'XXX/Classes/Category/**/*'
+#        category.dependency 'AFNetworking'
+#    end
+#
+#    s.subspec 'Downloader' do |dowmloader|
+#        dowmloader.source_files = 'XXX/Classes/Downloader/**/*'
+#        dowmloader.dependency 'YYModel'
+#    end
   # s.resource_bundles = {
   #   'UIModule' => ['UIModule/Assets/*.png']
   # }

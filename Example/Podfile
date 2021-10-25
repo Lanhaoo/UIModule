@@ -6,7 +6,6 @@ platform :ios, '9.0'
 
 target 'UIModule_Example' do
   pod 'UIModule', :path => '../'
-
   target 'UIModule_Tests' do
     inherit! :search_paths
 
