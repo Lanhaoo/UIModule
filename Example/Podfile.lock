@@ -1,32 +1,111 @@
 PODS:
+  - Alamofire (4.9.1)
+  - Alamofire-SwiftyJSON (3.0.0):
+    - Alamofire (~> 4.5)
+    - SwiftyJSON (~> 4.0.0)
   - AsyncSwift (2.0.4)
+  - AxcAE_TabBar (1.0.5)
   - DZNEmptyDataSet (1.8.1)
   - FWPopupView (4.2.1):
     - SnapKit
   - Kingfisher (4.10.1)
   - MJRefresh (3.7.2)
+  - PromiseKit (6.2.8):
+    - PromiseKit/CorePromise (= 6.2.8)
+    - PromiseKit/Foundation (= 6.2.8)
+    - PromiseKit/UIKit (= 6.2.8)
+  - PromiseKit/CorePromise (6.2.8)
+  - PromiseKit/Foundation (6.2.8):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.2.8):
+    - PromiseKit/CorePromise
+  - Reachability (3.2)
   - SnapKit (4.2.0)
+  - SVProgressHUD (2.0.4)
+  - SwiftyJSON (4.0.0)
   - TangramKit (1.4.2)
-  - UIModule (0.0.1):
+  - UIModule (0.0.2):
+    - Alamofire-SwiftyJSON
     - AsyncSwift
+    - AxcAE_TabBar
     - DZNEmptyDataSet
     - FWPopupView
-    - Kingfisher (~> 4.10.1)
+    - Kingfisher
     - MJRefresh
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
     - TangramKit
-    - UIModule/EZSwiftExtensions (= 0.0.1)
-  - UIModule/EZSwiftExtensions (0.0.1):
+    - UIModule/EZSwiftExtensions (= 0.0.2)
+    - UIModule/Layout (= 0.0.2)
+    - UIModule/Toast-Swift (= 0.0.2)
+    - UIModule/Tools (= 0.0.2)
+  - UIModule/EZSwiftExtensions (0.0.2):
+    - Alamofire-SwiftyJSON
     - AsyncSwift
+    - AxcAE_TabBar
     - DZNEmptyDataSet
     - FWPopupView
-    - Kingfisher (~> 4.10.1)
+    - Kingfisher
     - MJRefresh
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
+    - TangramKit
+  - UIModule/Layout (0.0.2):
+    - Alamofire-SwiftyJSON
+    - AsyncSwift
+    - AxcAE_TabBar
+    - DZNEmptyDataSet
+    - FWPopupView
+    - Kingfisher
+    - MJRefresh
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
+    - TangramKit
+  - UIModule/Toast-Swift (0.0.2):
+    - Alamofire-SwiftyJSON
+    - AsyncSwift
+    - AxcAE_TabBar
+    - DZNEmptyDataSet
+    - FWPopupView
+    - Kingfisher
+    - MJRefresh
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
+    - TangramKit
+  - UIModule/Tools (0.0.2):
+    - Alamofire-SwiftyJSON
+    - AsyncSwift
+    - AxcAE_TabBar
+    - DZNEmptyDataSet
+    - FWPopupView
+    - Kingfisher
+    - MJRefresh
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
     - TangramKit
 
 DEPENDENCIES:
   - UIModule (from `../`)
 
 SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Alamofire-SwiftyJSON
+    - AxcAE_TabBar
+    - PromiseKit
+    - Reachability
+    - SVProgressHUD
+    - SwiftyJSON
   trunk:
     - AsyncSwift
     - DZNEmptyDataSet
@@ -41,14 +120,21 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire-SwiftyJSON: 2b3649d57dc7bb2880fb8b86f8bb969397666916
   AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  AxcAE_TabBar: 1d5bcf6c4921889dc38839b6ba2c584a9b55251a
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FWPopupView: eea10388d25444fbe69b9222a5b5f317bb049395
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   MJRefresh: 30997d30b347c8e9508a4db11e3a690da0c9b85a
+  PromiseKit: 6788ce1a0ed5448b83d4aaf56b9fc49fb7647d32
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TangramKit: aad3ab8f9617418c9da96d59cddd71134ae8af83
-  UIModule: 12e951b7c05b1bca0e80c1b21aa7cf58d22f1319
+  UIModule: 7a78949c7c5e541c0f4490064be760c5196f84a1
 
 PODFILE CHECKSUM: e6acb9bef6f0f9eb95ad20543bbb8b7f1976be91
 

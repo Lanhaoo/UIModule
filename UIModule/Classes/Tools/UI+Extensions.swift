@@ -94,6 +94,13 @@ public extension UIDevice {
     }
 }
 
+public func ZCtoStr(_ o : Any?)->String{
+    guard let o = o else{
+        return ""
+    }
+    guard "\(o)" != "null" else{return ""}
+    return "\(o)"
+}
 
 public extension Error {
     var toString: String { return String(describing: self)}
@@ -187,7 +194,7 @@ public extension UIImageView {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
     }
-    func es_setImageWithURLString(_ string: String?, placeholderImage: UIImage? = UIImage(named: "ic_h_plaImg"),completionHandler : CompletionHandler?=nil) {
+    func es_setImageWithURLString(_ string: String?, placeholderImage: UIImage?,completionHandler : CompletionHandler?=nil) {
         
         let modifier = AnyModifier { request in
             var r = request
@@ -220,22 +227,20 @@ public extension UIImage {
     }
     
     func compressImageOnlength(maxLength: Int) -> Data? {
-//        guard let vData = self.jpegData(compressionQuality: 1) else { return nil }
-//        print("压缩前kb: \( Double((vData.count)/1024))")
-//        if vData.count < maxLength {
-//            return vData
-//        }
-//        var compress:CGFloat = 0.9
-//        guard var data = self.jpegData(compressionQuality: compress) else { return nil }
-//        while data.count > maxLength && compress > 0.01 {
-//            print( "压缩比: \(compress)")
-//            compress -= 0.02
-//            data = self.jpegData(compressionQuality: compress)!
-//        }
-//        print("压缩后kb: \(Double((data.count)/1024))")
-//        return data
-        
-        return nil
+        guard let vData = self.jpegData(compressionQuality: 1) else { return nil }
+        print("压缩前kb: \( Double((vData.count)/1024))")
+        if vData.count < maxLength {
+            return vData
+        }
+        var compress:CGFloat = 0.9
+        guard var data = self.jpegData(compressionQuality: compress) else { return nil }
+        while data.count > maxLength && compress > 0.01 {
+            print( "压缩比: \(compress)")
+            compress -= 0.02
+            data = self.jpegData(compressionQuality: compress)!
+        }
+        print("压缩后kb: \(Double((data.count)/1024))")
+        return data
     }
     
     func compressQuality(_ maxLength:Int)->Data{
@@ -341,298 +346,7 @@ public extension UILabel {
         self.attributedText = attrStr
     }
 }
-//extension UIButton {
-//    public func countDown(_ timeOut: Int,source : DispatchSourceTimer?=nil,resendTextColor:UIColor,timeChangedTextColor:UIColor) {
-//        var timeout = timeOut
-//        //倒计时时间
-//        var codeTimer : DispatchSourceTimer!
-//        if let source = source{
-//            codeTimer = source
-//        }else{
-//            
-//            let queue:DispatchQueue = DispatchQueue.global(qos: .default)
-//            codeTimer = DispatchSource.makeTimerSource(queue:queue)
-//        }
-//        
-//        codeTimer.schedule(deadline: .now(), repeating:.seconds(1))
-//        //每秒执行
-//        codeTimer.setEventHandler(handler: { () -> Void in
-//            if(timeout<=0){ //倒计时结束，关闭
-//                codeTimer.cancel()
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle("重新发送", for: .normal)
-//                    self.setTitleColor(resendTextColor, for: .normal)
-//                    self.backgroundColor = .clear
-//                    self.isUserInteractionEnabled = true
-//                })
-//            }else{//正在倒计时
-//                
-//                let seconds = timeout
-//                let strTime = NSString.localizedStringWithFormat("%.d", seconds)
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle(NSString.localizedStringWithFormat("%@S后重新发送", strTime) as String, for: .normal)
-//                    self.setTitleColor(timeChangedTextColor, for: .normal)
-//                    self.backgroundColor = .clear
-//                    self.isUserInteractionEnabled = false
-//                })
-//                timeout -= 1;
-//            }
-//        })
-//        codeTimer.resume()
-//    }
-//    
-//    public func surecountDown(_ timeOut: Int,source : DispatchSourceTimer?=nil) {
-//        var timeout = timeOut
-//        //倒计时时间
-//        var codeTimer : DispatchSourceTimer!
-//        
-//        var timerDifference = 0
-//        var backTimeInterval : TimeInterval!
-//        var activeTimeInterval : TimeInterval!
-//        //接收进入后台的通知
-//        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { notification in
-//            backTimeInterval = NSDate().timeIntervalSince1970
-//        }
-//        
-//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { notification in
-//            activeTimeInterval = NSDate().timeIntervalSince1970
-//            timerDifference = Int(activeTimeInterval - backTimeInterval)
-//            if timerDifference < 0 {
-//                timerDifference = 0;
-//            }
-//            timeout-=timerDifference;
-//            if (timeout<=0) {
-//                codeTimer.cancel()
-//                self.setTitle("重新发送", for: .normal)
-//                self.setTitleColor(AppColor.MainColor, for: .normal)
-//                self.backgroundColor = .clear
-//                self.isUserInteractionEnabled = true
-//            }else {
-//                self.setTitle(NSString.localizedStringWithFormat("%@S后重新发送", timeout.toString) as String, for: .normal)
-//                self.setTitleColor(AppColor.C153, for: .normal)
-//                self.backgroundColor = .clear
-//                // UIView.commitAnimations()
-//                self.isUserInteractionEnabled = false
-//            }
-//        }
-//        if let source = source{
-//            codeTimer = source
-//        }else{
-//            
-//            let queue:DispatchQueue = DispatchQueue.global(qos: .default)
-//            codeTimer = DispatchSource.makeTimerSource(queue:queue)
-//        }
-//        
-//        codeTimer.schedule(deadline: .now(), repeating:.seconds(1))
-//        //每秒执行
-//        codeTimer.setEventHandler(handler: { () -> Void in
-//            if(timeout<=0){ //倒计时结束，关闭
-//                codeTimer.cancel()
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle("阅读并同意", for: .normal)
-//                    self.setTitleColor(.white, for: .normal)
-//                    self.backgroundColor = AppColor.MainColor
-//                    self.isUserInteractionEnabled = true
-//                })
-//            }else{//正在倒计时
-//                
-//                let seconds = timeout
-//                let strTime = NSString.localizedStringWithFormat("%.d", seconds)
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    // UIView.beginAnimations(nil, context: nil)
-//                    // UIView.setAnimationDuration(1)
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle(NSString.localizedStringWithFormat("阅读并同意(%@S)", strTime) as String, for: .normal)
-//                    self.setTitleColor(rgba(255, 255, 255, 0.5), for: .normal)
-//                    // self.backgroundColor = .clear
-//                    self.setBackgroundColor(UIColor(hexString: "#45A090", alpha: 0.5)!, forState: .normal)
-//                    // UIView.commitAnimations()
-//                    self.isUserInteractionEnabled = false
-//                })
-//                timeout -= 1;
-//            }
-//        })
-//        codeTimer.resume()
-//    }
-//    
-//    public func countCodeDown(_ timeOut: Int,source : DispatchSourceTimer?=nil) {
-//        var timeout = timeOut
-//        //倒计时时间
-//        var codeTimer : DispatchSourceTimer!
-//        var timerDifference = 0
-//        var backTimeInterval : TimeInterval!
-//        var activeTimeInterval : TimeInterval!
-//        //接收进入后台的通知
-//        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { notification in
-//            backTimeInterval = NSDate().timeIntervalSince1970
-//        }
-//        
-//        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main) { notification in
-//            activeTimeInterval = NSDate().timeIntervalSince1970
-//            timerDifference = Int(activeTimeInterval - backTimeInterval)
-//            if timerDifference < 0 {
-//                timerDifference = 0;
-//            }
-//            timeout-=timerDifference;
-//            if (timeout<=0) {
-//                codeTimer.cancel()
-//                self.setTitle("重新发送", for: .normal)
-//                self.setTitleColor(AppColor.MainColor, for: .normal)
-//                self.backgroundColor = .clear
-//                self.isUserInteractionEnabled = true
-//            }else {
-//                self.setTitle(NSString.localizedStringWithFormat("%@S后重新发送", timeout.toString) as String, for: .normal)
-//                self.setTitleColor(AppColor.C153, for: .normal)
-//                self.backgroundColor = .clear
-//                // UIView.commitAnimations()
-//                self.isUserInteractionEnabled = false
-//            }
-//        }
-//        if let source = source{
-//            codeTimer = source
-//        }else{
-//            
-//            let queue:DispatchQueue = DispatchQueue.global(qos: .default)
-//            codeTimer = DispatchSource.makeTimerSource(queue:queue)
-//        }
-//        
-//        codeTimer.schedule(deadline: .now(), repeating:.seconds(1))
-//        //每秒执行
-//        codeTimer.setEventHandler(handler: { () -> Void in
-//            if(timeout<=0){ //倒计时结束，关闭
-//                codeTimer.cancel()
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle("重新发送", for: .normal)
-//                    self.setTitleColor(AppColor.MainColor, for: .normal)
-//                    self.backgroundColor = .clear
-//                    self.isUserInteractionEnabled = true
-//                })
-//            }else{//正在倒计时
-//                
-//                let seconds = timeout
-//                let strTime = NSString.localizedStringWithFormat("%.d", seconds)
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    // UIView.beginAnimations(nil, context: nil)
-//                    // UIView.setAnimationDuration(1)
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle(NSString.localizedStringWithFormat("%@S后重新发送", strTime) as String, for: .normal)
-//                    self.setTitleColor(AppColor.C153, for: .normal)
-//                    self.backgroundColor = .clear
-//                    // UIView.commitAnimations()
-//                    self.isUserInteractionEnabled = false
-//                })
-//                timeout -= 1;
-//            }
-//        })
-//        codeTimer.resume()
-//    }
-//    
-//    
-//    public func navCountDown(_ timeOut: Int, image: UIImage?) {
-//        //倒计时时间
-//        var timeout = timeOut
-//        let queue:DispatchQueue = DispatchQueue.global(qos: .default)
-//        
-//        // 在global线程里创建一个时间源
-//        let codeTimer = DispatchSource.makeTimerSource(queue:queue)
-//        
-//        codeTimer.schedule(deadline: .now(), repeating:.seconds(1))
-//        //每秒执行
-//        codeTimer.setEventHandler(handler: { () -> Void in
-//            if(timeout<=0){ //倒计时结束，关闭
-//                codeTimer.cancel()
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setTitle("", for: .normal)
-//                    self.setImage(image, for: .normal)
-//                    self.isUserInteractionEnabled = true
-//                })
-//            }else{//正在倒计时
-//                
-//                let seconds = timeout
-//                let strTime = NSString.localizedStringWithFormat("%.d", seconds)
-//                
-//                DispatchQueue.main.sync(execute: { () -> Void in
-//                    UIView.beginAnimations(nil, context: nil)
-//                    UIView.setAnimationDuration(1)
-//                    //设置界面的按钮显示 根据自己需求设置
-//                    self.setImage(nil, for: .normal)
-//                    self.setTitle(NSString.localizedStringWithFormat("%@S后重新发送", strTime) as String, for: .normal)
-//                    
-//                    UIView.commitAnimations()
-//                    self.isUserInteractionEnabled = false
-//                })
-//                timeout -= 1;
-//            }
-//            
-//        })
-//        codeTimer.resume()
-//    }
-//    
-//    
-//    
-//    public func es_setImageWithURLString(_ string: String?, placeholderImage: UIImage?) {
-//        if let string = string, string.length > 0 {
-//            self.kf.setBackgroundImage(with: URL(string: string), for: .normal, placeholder: placeholderImage, options: [.transition(.fade(1))], progressBlock: nil, completionHandler: nil)
-//        } else {
-//            self.setBackgroundImage(placeholderImage, for: .normal)
-//        }
-//    }
-//    
-//    
-//    public convenience init(title: String, titleFont: UIFont, titleColor: UIColor?, image:UIImage?, backgroundImage: UIImage?) {
-//        self.init()
-//        self.setBackgroundImage(backgroundImage, for: .normal)
-//        self.setImage(image, for: .normal)
-//        self.setBackgroundImage(backgroundImage, for: .highlighted)
-//        self.setTitle(title, for: .normal)
-//        self.setTitleColor(titleColor, for: .normal)
-//        self.titleLabel?.font = titleFont
-//    }
-//    
-//    func imagePosition(style: RGButtonImagePosition, spacing: CGFloat) {
-//        //得到imageView和titleLabel的宽高
-//        let imageWidth = self.imageView?.frame.size.width
-//        let imageHeight = self.imageView?.frame.size.height
-//        var labelWidth: CGFloat! = 0.0
-//        var labelHeight: CGFloat! = 0.0
-//        labelWidth = self.titleLabel?.intrinsicContentSize.width
-//        labelHeight = self.titleLabel?.intrinsicContentSize.height
-//        //初始化imageEdgeInsets和labelEdgeInsets
-//        var imageEdgeInsets = UIEdgeInsets.zero
-//        var labelEdgeInsets = UIEdgeInsets.zero
-//        //根据style和space得到imageEdgeInsets和labelEdgeInsets的值
-//        switch style {
-//        case .top:
-//            //上 左 下 右
-//            imageEdgeInsets = UIEdgeInsets(top: -labelHeight-spacing/2, left: 0, bottom: 0, right: -labelWidth)
-//            labelEdgeInsets = UIEdgeInsets(top: 0, left: -imageWidth!, bottom: -imageHeight!-spacing/2, right: 0)
-//            break;
-//        case .left:
-//            imageEdgeInsets = UIEdgeInsets(top: 0, left: -spacing/2, bottom: 0, right: spacing)
-//            labelEdgeInsets = UIEdgeInsets(top: 0, left: spacing/2, bottom: 0, right: -spacing/2)
-//            break;
-//        case .bottom:
-//            imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: -labelHeight!-spacing/2, right: -labelWidth)
-//            labelEdgeInsets = UIEdgeInsets(top: -imageHeight!-spacing/2, left: -imageWidth!, bottom: 0, right: 0)
-//            break;
-//        case .right:
-//            imageEdgeInsets = UIEdgeInsets(top: 0, left: labelWidth+spacing/2, bottom: 0, right: -labelWidth-spacing/2)
-//            labelEdgeInsets = UIEdgeInsets(top: 0, left: -imageWidth!-spacing/2, bottom: 0, right: imageWidth!+spacing/2)
-//            break;
-//        }
-//        self.titleEdgeInsets = labelEdgeInsets
-//        self.imageEdgeInsets = imageEdgeInsets
-//    }
-//    
-//    
-//
-//    
-//}
+
 
 public extension UIStoryboard{
     
@@ -642,9 +356,17 @@ public extension UIStoryboard{
     }
     
 }
-public extension UIViewController {
+extension UIViewController {
     
-    func popVCByLevel(level: Int, fail: () -> Void) {
+    public func setStatusBlack(){
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default;
+    }
+    
+    public func setStatusWhite(){
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent;
+    }
+    
+    public func popVCByLevel(level: Int, fail: () -> Void) {
         if let viewControllers = self.navigationController?.viewControllers , viewControllers.count > level {
             let lastIndex = viewControllers.count - 1
             let popVC = viewControllers[lastIndex - level]
@@ -654,7 +376,7 @@ public extension UIViewController {
         }
     }
     
-    func popVCByClass(name: String, fail: () -> Void) {
+    public func popVCByClass(name: String, fail: () -> Void) {
         if let viewControllers = self.navigationController?.viewControllers , viewControllers.count > 0 {
             var vc : UIViewController = UIViewController()
             for item in viewControllers{
@@ -666,10 +388,9 @@ public extension UIViewController {
             fail()
         }
     }
-    func pop2RootVC() {
+    public func pop2RootVC() {
         self.popToRootVC()
     }
-    
     func push(vc:String,sb:String) -> UIViewController{
         let vcObject = UIStoryboard.instantiate(vc: vc, sb: sb)
         self.hidesBottomBarWhenPushed = true;

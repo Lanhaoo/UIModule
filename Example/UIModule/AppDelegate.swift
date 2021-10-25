@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Alamofire
+import UIModule
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        NetWorkManager.shared.headers = ["X-Access-Token":"prefix_user_token_app_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzQ4MDQ1MzMsInVzZXJuYW1lIjoiMTgzMjQxMTQ4NTAifQ.uw4O6ER5HOKwG2b6TpKJtSnKjhmoeOqPvPOODFYbfAI"]
+        let paramter = RequestInfo.requestInfo()
+            .addParaValue(value: "order_type", forKey: "code")
+        NetWorkManager.shared.sendGetRequest(url: "http://123.60.17.240:8099/smartyProperty/dcqtech/dict/getSecondDict", parameters: paramter.toDictionary()).done { json in
+            ResponseAdapter.parseData(json: json).done { dt in
+                
+            }.catch { error in
+                /*
+                 服务器返回的 code 非“成功”的code的回调
+                 比如约定好 正确的code是:200 这个时候服务器返回的code非 200 就会进入这里
+                 */
+                print(ResponseAdapter.errorMsg(error: error))
+            }
+        }.catch { error in
+            /*
+             网络不可用和服务器访问错误会进入这个回调
+             */
+            let code = ResponseAdapter.errorCode(error: error)
+        }
         return true
     }
 

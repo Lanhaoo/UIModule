@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIModule'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = '项目ui模块'
   s.description      = <<-DESC
 项目ui的基础模块
@@ -19,27 +19,33 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/Lanhaoo/UIModule.git', :tag => s.version.to_s }
   s.ios.deployment_target = '9.0'
   s.swift_version    = '5.0'
-  s.source_files = 'UIModule/Classes/**/*'
   
   s.subspec 'EZSwiftExtensions' do |ezswiftExtensions|
       ezswiftExtensions.source_files = 'UIModule/Classes/EZSwiftExtensions/*'
       end
-#  s.subspec 'Category' do |category|
-#        category.source_files = 'XXX/Classes/Category/**/*'
-#        category.dependency 'AFNetworking'
-#    end
-#
-#    s.subspec 'Downloader' do |dowmloader|
-#        dowmloader.source_files = 'XXX/Classes/Downloader/**/*'
-#        dowmloader.dependency 'YYModel'
-#    end
-  # s.resource_bundles = {
-  #   'UIModule' => ['UIModule/Assets/*.png']
-  # }
+  
+  s.subspec 'Layout' do |layout|
+      layout.source_files = 'UIModule/Classes/Layout/*'
+      end
+  
+  s.subspec 'Tools' do |tools|
+      tools.source_files = 'UIModule/Classes/Tools/*'
+      end
+  
+  s.subspec 'Toast-Swift' do |toastSwift|
+      toastSwift.source_files = 'UIModule/Classes/Toast-Swift/*'
+      end
+  
   s.dependency 'TangramKit'
   s.dependency 'DZNEmptyDataSet'
   s.dependency 'MJRefresh'
-  s.dependency 'Kingfisher','~>4.10.1'
+  s.dependency 'Kingfisher'
   s.dependency 'FWPopupView'
   s.dependency 'AsyncSwift'
+  s.dependency 'Alamofire-SwiftyJSON'
+  s.dependency 'PromiseKit'
+  s.dependency 'SVProgressHUD'
+  s.dependency 'SwiftyJSON'
+  s.dependency 'AxcAE_TabBar'
+  s.dependency 'Reachability'
 end
